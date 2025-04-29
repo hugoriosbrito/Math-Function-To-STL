@@ -51,11 +51,8 @@ def calcular_malha(res, ampl, size, func_str):
             "abs": np.abs, "pi": np.pi, "size": size,
             "cosh": np.cosh, "sinh": np.sinh, "tanh": np.tanh,
             "power": np.power, # Ex: power(x, 2) para x**2
-            # Adicione outras funções NumPy seguras conforme necessário
         }
-        # Avalia a expressão matemática fornecida pelo usuário
-        # ATENÇÃO: eval() é um risco de segurança inerente, mesmo sandboxed.
-        # Considere alternativas mais seguras (parsers dedicados) para apps críticos.
+       
         z_raw = ampl * eval(func_str, {"__builtins__": None}, safe_dict)
 
         # Validação do resultado de Z (deve ser um array numérico)
