@@ -78,10 +78,6 @@ functo3D/
 - **Grades Cruzadas**: `cos(x) * sin(y)`
 - **Paraboloide**: `0.1 * (x**2 + y**2)`
 
-## Observações de Segurança
-
-- O uso de `eval` para avaliar funções matemáticas pode ser um risco de segurança. Certifique-se de que o ambiente seja seguro antes de permitir entradas de usuários não confiáveis.
-
 ## Contribuindo
 
 Contribuições são bem-vindas! Siga os passos abaixo para contribuir:
@@ -109,5 +105,5 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 Para dúvidas ou sugestões, entre em contato:
 
-- **Autor**: Hugo Brito
-- **Email**: hugo.brito@example.com
+- **Autor**: Hugo Rios Brito
+- **Email**: hugoba532@gmail.com
