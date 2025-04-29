@@ -97,10 +97,6 @@ Contribuições são bem-vindas! Siga os passos abaixo para contribuir:
    ```
 5. Abra um Pull Request.
 
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
 ## Contato
 
 Para dúvidas ou sugestões, entre em contato:
