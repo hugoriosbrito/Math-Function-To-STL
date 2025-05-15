@@ -87,7 +87,7 @@ def calcular_malha(res, ampl, size, func_str, modo="função"):
             # --- Avaliação Segura da Função ---
             # Ambiente limitado para segurança. Funções permitidas:
             safe_dict = {
-                "x": x, "y": y, "np": np,  # Permitir np pode ser um risco se não confiar nos usuários
+                "x": x, "y": y, "np": np, 
                 "sin": np.sin, "cos": np.cos, "tan": np.tan,
                 "sqrt": np.sqrt, "exp": np.exp, "log": np.log, "log10": np.log10,
                 "abs": np.abs, "pi": np.pi, "size": size,
@@ -165,10 +165,8 @@ def calcular_malha(res, ampl, size, func_str, modo="função"):
             return (x, y, z, all_vertices, faces, x_vals, y_vals), None  # Sucesso
 
     except Exception as e:
-        # Log detalhado do erro no console do Streamlit (para o desenvolvedor)
         print(f"Erro detalhado em calcular_malha para func='{func_str}':")
         print(traceback.format_exc())
-        # Mensagem de erro para o usuário
         user_error_message = f"Erro ao processar a função '{func_str}': {e}. Verifique a sintaxe e as funções permitidas."
         return None, user_error_message
 
@@ -243,7 +241,7 @@ with col1:
     # --- Seleção do Método de Entrada ---
     input_method = st.radio(
         "Método de Entrada da Função:",
-        ("Funções Pré-definidas", "Função Personalizada", "Hiperboloide Paramétrico"),  # Adicionado modo especial
+        ("Funções Pré-definidas", "Função Personalizada", "Hiperboloide Paramétrico"),  
         horizontal=True,
         key="input_method_radio"
     )
@@ -265,8 +263,7 @@ with col1:
         - u varia de 0 a 2π
         - v varia de -tamanho/3 a tamanho/3
         """)
-        # Não precisa de entrada de função aqui
-        func_str = "HIPERBOLOIDE"  # Placeholder
+        func_str = "HIPERBOLOIDE"  
         modo_calculo = "hiperboloide"
 
     elif input_method == "Função Personalizada":
@@ -368,7 +365,7 @@ with col2:
                             ax.set_title("Hiperboloide de Uma Folha (Forma Paramétrica)", fontsize=11)
                         else:
                             # Usar stride para plotar menos pontos na visualização se a resolução for muito alta
-                            stride_val = max(1, res // 100)  # Ex: plota 1 a cada N pontos se res > 100
+                            stride_val = max(1, res // 100) 
                             surf = ax.plot_surface(x, y, z, cmap='viridis', edgecolor='none',
                                                    antialiased=True, rstride=stride_val, cstride=stride_val)
                             ax.set_title(f"Visualização Aprox.: {func_str[:50]}{'...' if len(func_str) > 50 else ''}",
@@ -415,7 +412,6 @@ with col2:
                                 with open(stl_path, 'rb') as f:
                                     stl_bytes = f.read()
 
-                                # Gera um nome de arquivo mais seguro
                                 if modo_calculo == "hiperboloide":
                                     file_name_stl = f"hiperboloide_r{res}_a{ampl}_s{size}.stl"
                                 else:
@@ -440,24 +436,15 @@ with col2:
                                 st.error(f"Erro ao preparar o download: {e_down}")
                                 download_placeholder.empty()
                             finally:
-                                # Tenta remover o arquivo temporário APÓS o botão ser preparado/clicado
-                                # Idealmente, a remoção ocorreria após o download, mas Streamlit não facilita isso.
-                                # Remover aqui significa que o arquivo pode sumir se o usuário demorar para clicar.
-                                # Uma alternativa é agendar a limpeza ou usar um diretório temporário gerenciado.
                                 if stl_path and os.path.exists(stl_path):
                                     try:
-                                        # Não remover imediatamente para dar tempo ao usuário baixar
-                                        # A limpeza de arquivos temporários do sistema geralmente cuida disso.
-                                        # os.remove(stl_path)
-                                        pass  # Deixar o sistema operacional limpar /tmp
+                                        pass  
                                     except OSError as e_rem:
                                         st.warning(f"Não foi possível remover o arquivo temporário {stl_path}: {e_rem}")
                         else:
                             st.error("❌ Falha desconhecida ao gerar o caminho do arquivo STL.")
                             download_placeholder.empty()
-            # Fim do bloco try/except principal
     else:
-        # Mensagem inicial ou quando não está processando
         plot_placeholder.info(
             "Configure os parâmetros à esquerda e clique em 'Gerar Modelo 3D' para visualizar e baixar o arquivo STL.")
-        download_placeholder.empty()  # Garante que o botão de download não fique visível
+        download_placeholder.empty()  
